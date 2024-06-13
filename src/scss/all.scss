@@ -1,0 +1,28 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+
+@import 'bootstrap/scss/functions';
+// 2. Include any default variable overrides here
+@import './bootstrap-custom/variables';
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import 'bootstrap/scss/variables';
+
+// 4. Include remainder of required parts
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/root';
+
+@import 'bootstrap/scss/utilities';
+
+// 下面放入自訂utilities
+@import './bootstrap-custom/utilities';
+//
+
+@import 'bootstrap/scss/utilities/api';
+
+@import 'bootstrap/scss/bootstrap';
+
+
+// 自訂樣式
+@import './mixins/mixins.scss';
+@import './base/base';
