@@ -302,6 +302,7 @@ $primary-700:  #1FB588; //$blue !default custom-var;
 $primary-600:  #28DAA5; //$blue !default custom-var;
 $gray-100:     #FEFEFE; //$gray-100 !default custom-var;
 $gray-200:     #F0F0F0; //$gray-100 !default custom-var;
+$gray-300:     #D4D4D4; //$gray-100 !default custom-var;
 $gray-400:     #B8B8B8; //$gray-100 !default custom-var;
 $gray-500:     #808080; //$gray-100 !default custom-var;
 $gray-600:     #616161; //$gray-100 !default custom-var;
@@ -324,6 +325,7 @@ $theme-colors: (
   "primary-600": $primary-600,
   "gray-100":    $gray-100,
   "gray-200":    $gray-200,
+  "gray-300":    $gray-300,
   "gray-400":    $gray-400,
   "gray-500":    $gray-500,
   "gray-600":    $gray-600,
@@ -477,6 +479,7 @@ $custom-spacers: (
   75: 75%,
   100: 100%,
   auto: auto,
+  30p: 1.875rem,  // 30px
   50p: 3.125rem,  // 50px
   75p: 4.6875rem, // 75px, 
   100p: 6.25rem,  // 100px
@@ -882,11 +885,11 @@ $input-btn-border-width:      var(--#{$prefix}border-width) !default;
 
 // scss-docs-start btn-variables
 $btn-color:                   var(--#{$prefix}body-color) !default;
-$btn-padding-y:               $input-btn-padding-y !default;
-$btn-padding-x:               $input-btn-padding-x !default;
+$btn-padding-y:               0.5625rem; //$input-btn-padding-y !default;
+$btn-padding-x:               1.3125rem; //$input-btn-padding-x !default;
 $btn-font-family:             $input-btn-font-family !default;
-$btn-font-size:               $input-btn-font-size !default;
-$btn-line-height:             $input-btn-line-height !default;
+$btn-font-size:               $font-size-base * 0.9375; //$input-btn-font-size !default;
+$btn-line-height:             1.2; //$input-btn-line-height !default;
 $btn-white-space:             null !default; // Set to `nowrap` to prevent text wrapping
 
 $btn-padding-y-sm:            $input-btn-padding-y-sm !default;
@@ -912,7 +915,7 @@ $btn-link-disabled-color:     $gray-600 !default;
 $btn-link-focus-shadow-rgb:   to-rgb(mix(color-contrast($link-color), $link-color, 15%)) !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius:           var(--#{$prefix}border-radius) !default;
+$btn-border-radius:           3.9375rem; //var(--#{$prefix}border-radius) !default;
 $btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
 $btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
 
@@ -1269,7 +1272,7 @@ $navbar-toggler-padding-y:          .25rem !default;
 $navbar-toggler-padding-x:          .75rem !default;
 $navbar-toggler-font-size:          $font-size-lg !default;
 $navbar-toggler-border-radius:      $btn-border-radius !default;
-$navbar-toggler-focus-width:        $btn-focus-width !default;
+$navbar-toggler-focus-width:        0; //$btn-focus-width !default;
 $navbar-toggler-transition:         box-shadow .15s ease-in-out !default;
 
 $navbar-light-color:                rgba(var(--#{$prefix}emphasis-color-rgb), .65) !default;

@@ -565,7 +565,9 @@ $utilities: map-merge(
     // scss-docs-start utils-color
     "color": (
       property: color,
+      responsive: true,
       class: text,
+      state: hover,
       local-vars: (
         "text-opacity": 1
       ),
@@ -652,6 +654,7 @@ $utilities: map-merge(
     "background-color": (
       property: background-color,
       class: bg,
+      responsive: true,
       local-vars: (
         "bg-opacity": 1
       ),
