@@ -1,0 +1,20 @@
+.index-banner {
+  height: 22.1875rem;
+  background-image: url('@/assets/images/banner-image/banner-index.png');
+
+  h1 {
+    text-shadow: 0px 2px 10px rgb(128, 128, 128, .7);
+  }
+  
+  @include media-breakpoint-up(xl) {
+    height: 42.875rem;
+  }
+}
+
+.index-attraction .carousel-item img{
+  height: 22.875rem;
+  
+  @include media-breakpoint-up(xl) {
+    height: 21.1875rem;
+  }
+}

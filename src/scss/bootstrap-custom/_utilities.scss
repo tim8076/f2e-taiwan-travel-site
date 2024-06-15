@@ -198,6 +198,7 @@ $utilities: map-merge(
     // scss-docs-start utils-sizing
     "width": (
       property: width,
+      responsive: true,
       class: w,
       values: $custom-spacers,
     ),
@@ -218,6 +219,7 @@ $utilities: map-merge(
     ),
     "height": (
       property: height,
+      responsive: true,
       class: h,
       values: $custom-spacers,
     ),
@@ -494,6 +496,7 @@ $utilities: map-merge(
       values: (monospace: var(--#{$prefix}font-monospace))
     ),
     "font-size": (
+      responsive: true,
       rfs: true,
       property: font-size,
       class: fs,
@@ -653,6 +656,7 @@ $utilities: map-merge(
     // scss-docs-start utils-bg-color
     "background-color": (
       property: background-color,
+      state: hover,
       class: bg,
       responsive: true,
       local-vars: (
@@ -793,6 +797,13 @@ $utilities: map-merge(
       class: z,
       values: $zindex-levels,
     ),
+    "inset": (
+      property: inset,
+      class: inset,
+      values: (
+        0: 0,
+      ),
+    ),
     'cursor': (
       property: cursor,
       class: cursor,
@@ -804,9 +815,7 @@ $utilities: map-merge(
       class: letter-spacing,
       responsive: true,
       values: (
-        1: 1px,
-        2: 2px,
-        3: 3px
+        12: 0.2em,
       )
     ),
     'background-size': (
@@ -816,6 +825,25 @@ $utilities: map-merge(
         cover: cover,
         contain: contain,
       )
+    ),
+    'background-repeat': (
+      property: 'background-repeat',
+      class: bg-repeat,
+      values: (
+        0: no-repeat,
+      )
+    ),
+    'background-position': (
+      property: 'background-position',
+      class: bg-position,
+      values: (
+        center: center center,
+      )
+    ),
+    'transition': (
+      property: 'transition',
+      class: transition,
+      values: $transitions,
     ),
     // scss-docs-end utils-zindex
   ),

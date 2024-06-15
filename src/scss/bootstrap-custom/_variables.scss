@@ -307,6 +307,7 @@ $gray-400:     #B8B8B8; //$gray-100 !default custom-var;
 $gray-500:     #808080; //$gray-100 !default custom-var;
 $gray-600:     #616161; //$gray-100 !default custom-var;
 $gray-700:     #434343; //$gray-100 !default custom-var;
+$gray-800:     #242424; //$gray-100 !default custom-var;
 $dark:         #000;  //$gray-900 !default custom-var;
 $primary:       $blue !default;
 $secondary:     $gray-600 !default;
@@ -330,6 +331,7 @@ $theme-colors: (
   "gray-500":    $gray-500,
   "gray-600":    $gray-600,
   "gray-700":    $gray-700,
+  "gray-800":    $gray-800,
   "secondary":  $secondary,
   "success":    $success,
   "info":       $info,
@@ -475,14 +477,18 @@ $spacers: (
 // width height
 $custom-spacers: (
   25: 25%,
+  40: 40%,
   50: 50%,
   75: 75%,
   100: 100%,
   auto: auto,
+  24p: 1.5rem,    //24px
   30p: 1.875rem,  // 30px
+  40p: 2.5rem,    // 40px
   50p: 3.125rem,  // 50px
   75p: 4.6875rem, // 75px, 
   100p: 6.25rem,  // 100px
+  171p: 10.6875rem //171px
 );
 // scss-docs-end spacer-variables-maps
 
@@ -494,7 +500,8 @@ $custom-spacers: (
 $position-values: (
   0: 0,
   50: 50%,
-  100: 100%
+  100: 100%,
+  28p: 1.75rem,
 ) !default;
 // scss-docs-end position-map
 
@@ -623,9 +630,11 @@ $border-radius-2xl:           $border-radius-xxl !default; // Deprecated in v5.3
 // fusv-enable
 
 // scss-docs-start box-shadow-variables
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow:                  0 4px 20px rgba(128, 128, 128, .2); //0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-card-hover:       0px 2px 10px rgb(128, 128, 128, .7);
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
 $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
 // scss-docs-end box-shadow-variables
 
@@ -652,6 +661,11 @@ $transition-fade:             opacity .15s linear !default;
 $transition-collapse:         height .35s ease !default;
 $transition-collapse-width:   width .35s ease !default;
 // scss-docs-end collapse-transition
+
+$transitions: (
+  'base': $transition-base,
+  'fade': $transition-fade,
+);
 
 // stylelint-disable function-disallowed-list
 // scss-docs-start aspect-ratios
@@ -694,7 +708,7 @@ $font-weight-bolder:          bolder !default;
 $font-weight-base:            $font-weight-normal !default;
 
 $line-height-base:            1.5 !default;
-$line-height-sm:              1.25 !default;
+$line-height-sm:              1.2; //!default;
 $line-height-lg:              2 !default;
 
 $h1-font-size:                $font-size-base * 2.5 !default;
@@ -892,8 +906,8 @@ $btn-font-size:               $font-size-base * 0.9375; //$input-btn-font-size !
 $btn-line-height:             1.2; //$input-btn-line-height !default;
 $btn-white-space:             null !default; // Set to `nowrap` to prevent text wrapping
 
-$btn-padding-y-sm:            $input-btn-padding-y-sm !default;
-$btn-padding-x-sm:            $input-btn-padding-x-sm !default;
+$btn-padding-y-sm:            0.25rem;  //$input-btn-padding-y-sm !default;
+$btn-padding-x-sm:            0.625rem; //$input-btn-padding-x-sm !default;
 $btn-font-size-sm:            $input-btn-font-size-sm !default;
 
 $btn-padding-y-lg:            $input-btn-padding-y-lg !default;
@@ -1558,8 +1572,8 @@ $toast-header-border-color:         $toast-border-color !default;
 $badge-font-size:                   .75em !default;
 $badge-font-weight:                 $font-weight-bold !default;
 $badge-color:                       $white !default;
-$badge-padding-y:                   .35em !default;
-$badge-padding-x:                   .65em !default;
+$badge-padding-y:                   0.25rem;//.35em !default;
+$badge-padding-x:                   0.625rem; //.65em !default;
 $badge-border-radius:               var(--#{$prefix}border-radius) !default;
 // scss-docs-end badge-variables
 

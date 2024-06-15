@@ -8,6 +8,7 @@
     font-size: 0.75rem;
     line-height: 14px;
     flex-grow: 1;
+    color: $gray-500;
     border: none;
     border-top-left-radius: 61px;
     border-bottom-left-radius: 61px;
@@ -20,17 +21,18 @@
     border: 0;
     padding: 0 1rem;
     background-color: $gray-100;
+    color: $gray-500;
     display: flex;
     align-items: center;
   }
-
-  &.search-input-lg {
-    &__input {
-      padding: 1.25rem 2.5rem;
-    }
-    &__btn {
-      padding: 0 2.5rem;
-    } 
+  
+  // sizes
+  &.search-input-lg &__input{
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+  } 
+  &.search-input-lg  &__btn {
+    padding: 0 1.25rem;
   }
 
   // color
@@ -54,6 +56,17 @@
   &:hover &__input,
   &:hover &__btn{
     background-color: $gray-300;
+    color: $gray-500;
   }
-  // focus
+
+  &.search-input-lg:hover {
+    box-shadow: $box-shadow-card-hover;
+  }
+
+  //focus
+  &.search-input-lg &__input:focus,
+  &.search-input-lg &__input:focus + &__btn {
+    background-color: $gray-100;
+    color: $gray-500;
+  }
 }

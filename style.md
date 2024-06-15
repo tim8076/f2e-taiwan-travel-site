@@ -74,3 +74,10 @@ $font-sizes: (
   8: $font-size-base * 0.75,    // 12px
 );
 ```
+
+## line-height
+``` scss
+$line-height-base:            1.5 !default;
+$line-height-sm:              1.2; //!default;
+$line-height-lg:              2 !default;
+```
