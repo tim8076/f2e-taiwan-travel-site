@@ -13,19 +13,13 @@
       :autoplay="{
         delay: 2500,
         disableOnInteraction: false,
-      }"
-    >
-      <swiper-slide>
-        <CardAttraction />
-      </swiper-slide>
-      <swiper-slide>
-        <CardAttraction />
-      </swiper-slide>
-      <swiper-slide>
-        <CardAttraction />
-      </swiper-slide>
-      <swiper-slide>
-        <CardAttraction />
+      }">
+      <swiper-slide
+        v-for="data in swiperData"
+        :key="data.ScenicSpotID">
+        <CardAttraction
+          :placeData="data"
+          :type="type" />
       </swiper-slide>
     </swiper-container>
     <div class="swiper-button-custom-prev transition-base bg-gray-300-hover">
@@ -43,6 +37,10 @@
   register();
   export default {
     props: {
+      type: {
+        type: String,
+        required: true,
+      },
       slidesPerView: {
         type: Number,
         default: 1,

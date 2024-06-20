@@ -1,16 +1,21 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 
-import App from './App.vue'
-import router from './router'
+import App from './App.vue';
+import router from './router';
 
-// Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap';
 
-const app = createApp(App)
+// axios 套件
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-app.use(createPinia())
-app.use(router)
-app.use(bootstrap)
+// sweet alert 套件
 
-app.mount('#app')
+
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(router);
+app.use(VueAxios, axios);
+
+app.mount('#app');

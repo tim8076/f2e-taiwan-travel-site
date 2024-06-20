@@ -81,3 +81,34 @@ $line-height-base:            1.5 !default;
 $line-height-sm:              1.2; //!default;
 $line-height-lg:              2 !default;
 ```
+
+``` s
+0:Reactive
+ScenicSpotID:"C1_376490000A_000096"
+ScenicSpotName:"北港工藝坊"
+DescriptionDetail:"百年藝鎮，巷弄藏文化！曾是稅務分局舊宿舍，現在是人稱百年藝鎮的北港鎮工藝產業中心。鄰近將酒甕砌築紅磚的甕牆，集結當地文史工作者和傳統工藝產業，輻射出北港市區處處驚喜的巷弄文化。北港工藝坊建於西元1964年，是北港甕牆的所在，也是稅務分局舊宿舍地址，位於朝天宮附近的巷弄內，於2013年12月20日正式開館，是以北港宗教工藝產業為主體的據點，保留著50年代街巷老屋的古樸韻味，還增添了許多文藝氣息，吸引地工藝師、地方文史工作者以及喜愛歷史人文旅遊的民眾前來了解北港地方傳統與宗教工藝之美。"
+Description:"百年藝鎮，巷弄藏文化！曾是稅務分局舊宿舍，現在是人稱百年藝鎮的北港鎮工藝產業中心。鄰近將酒甕砌築紅磚的甕牆，集結當地文史工作者和傳統工藝產業，輻射出北港市區處處驚喜的巷弄文化。"
+Phone:"886-5-7834595"
+Address:"雲林縣北港鎮共和街2號"
+ZipCode:"651"
+OpenTime:"10:00-16:00一二公休"
+Picture:Object
+PictureDescription1:"北港工藝坊"
+PictureDescription2:"北港工藝坊"
+PictureDescription3:"北港工藝坊"
+PictureUrl1:"https://tour.yunlin.gov.tw/public/upload/old/20180709051707.jpg"
+PictureUrl2:"https://tour.yunlin.gov.tw/public/upload/old/20180709051710.jpg"
+PictureUrl3:"https://tour.yunlin.gov.tw/public/upload/old/20180709051713.jpg"
+MapUrl:"https://goo.gl/bWLMsF"
+Position:Object
+GeoHash:"wsjw1d4q4"
+PositionLat:23.566709518432617
+PositionLon:120.30349731445312
+ParkingInfo:"有停車場"
+ParkingPosition:Object (empty)
+TicketInfo:"免費參觀"
+Keyword:"北港工藝坊,Beigang Craft"
+City:"雲林縣"
+SrcUpdateTime:"2024-06-15T01:34:36+08:00"
+UpdateTime:"2024-06-15T02:14:55+08:00"
+```

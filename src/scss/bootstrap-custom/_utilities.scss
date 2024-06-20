@@ -210,7 +210,10 @@ $utilities: map-merge(
     "viewport-width": (
       property: width,
       class: vw,
-      values: (100: 100vw)
+      values: (
+        80: 80vw,
+        100: 100vw
+      )
     ),
     "min-viewport-width": (
       property: min-width,
@@ -231,7 +234,10 @@ $utilities: map-merge(
     "viewport-height": (
       property: height,
       class: vh,
-      values: (100: 100vh)
+      values: (
+        80: 80vh,
+        100: 100vh
+      )
     ),
     "min-viewport-height": (
       property: min-height,
@@ -815,6 +821,7 @@ $utilities: map-merge(
       class: letter-spacing,
       responsive: true,
       values: (
+        5: 0.05em,
         12: 0.2em,
       )
     ),

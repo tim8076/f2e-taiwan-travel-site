@@ -12,10 +12,15 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "pinia": "^2.1.7",
+    "qs": "^6.12.1",
+    "sweetalert2": "^11.11.1",
     "swiper": "^11.1.4",
     "vue": "^3.4.21",
+    "vue-axios": "^3.5.2",
+    "vue-loading-overlay": "6.0",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

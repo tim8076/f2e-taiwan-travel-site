@@ -1,8 +1,10 @@
 <template>
-  <header>
+  <header class="sticky-top shadow-sm">
     <nav class="navbar navbar-expand-lg bg-gray-200 bg-lg-gray-100 py-3">
       <div class="container px-4">
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
           <i class="fa-solid fa-bars"></i>
         </button>
         <div class="d-flex align-items-center">
@@ -16,7 +18,9 @@
             </button>
           </div>
         </div>
-       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +32,8 @@
           </div>
           <div class="d-flex justify-content-between align-items-center mb-5 mb-lg-0 ms-lg-auto
             justify-content-lg-start">
-            <router-link to="/" class="btn btn-gray-100 text-gray-600 text-primary-700-hover">
+            <router-link :to="{ name: 'spotList' }"
+              class="btn btn-gray-100 text-gray-600 text-primary-700-hover">
               找景點
               <i class="fa-solid fa-paper-plane fs-7 ms-1"></i>
             </router-link>
