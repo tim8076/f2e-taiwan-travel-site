@@ -298,6 +298,7 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
+$primary-800:  #188E6B; //$blue !default custom-var;
 $primary-700:  #1FB588; //$blue !default custom-var;
 $primary-600:  #28DAA5; //$blue !default custom-var;
 $gray-100:     #FEFEFE; //$gray-100 !default custom-var;
@@ -322,6 +323,7 @@ $light:         #fff !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
+  "primary-800": $primary-800,
   "primary-700": $primary-700,
   "primary-600": $primary-600,
   "gray-100":    $gray-100,
@@ -402,7 +404,7 @@ $enable-cssgrid:              false !default;
 $enable-button-pointers:      true !default;
 $enable-rfs:                  false; //true !default custom-var;
 $enable-validation-icons:     true !default;
-$enable-negative-margins:     false !default;
+$enable-negative-margins:     true; //false !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities:  true !default;
 
@@ -483,6 +485,7 @@ $custom-spacers: (
   75: 75%,
   100: 100%,
   auto: auto,
+  19p: 1.1875rem, //19px
   24p: 1.5rem,    //24px
   30p: 1.875rem,  // 30px
   34p: 2.125rem,  // 34px
@@ -490,8 +493,12 @@ $custom-spacers: (
   50p: 3.125rem,  // 50px
   75p: 4.6875rem, // 75px, 
   100p: 6.25rem,  // 100px
+  125p: 7.8125rem, // 125px
   171p: 10.6875rem, //171px
+  220p: 13.75rem,   // 220px
   300p: 18.75rem,  // 300px
+  352p: 22rem,     // 352px
+  436p: 27.25rem,  // 436px
   452p: 28.25rem, // 452px
   500p: 31.25rem, // 500px
 );
@@ -1729,15 +1736,15 @@ $figure-caption-color:              var(--#{$prefix}secondary-color) !default;
 // Breadcrumbs
 
 // scss-docs-start breadcrumb-variables
-$breadcrumb-font-size:              null !default;
+$breadcrumb-font-size:              0.9375rem; //null !default;
 $breadcrumb-padding-y:              0 !default;
 $breadcrumb-padding-x:              0 !default;
-$breadcrumb-item-padding-x:         .5rem !default;
+$breadcrumb-item-padding-x:         .25rem !default;
 $breadcrumb-margin-bottom:          1rem !default;
 $breadcrumb-bg:                     null !default;
-$breadcrumb-divider-color:          var(--#{$prefix}secondary-color) !default;
+$breadcrumb-divider-color:          $gray-500; //var(--#{$prefix}secondary-color) !default;
 $breadcrumb-active-color:           var(--#{$prefix}secondary-color) !default;
-$breadcrumb-divider:                quote("/") !default;
+$breadcrumb-divider:                quote("＞") !default;
 $breadcrumb-divider-flipped:        $breadcrumb-divider !default;
 $breadcrumb-border-radius:          null !default;
 // scss-docs-end breadcrumb-variables

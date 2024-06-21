@@ -13,7 +13,12 @@ const router = createRouter({
       path: '/spotList',
       name: 'spotList',
       component: () => import('../views/SpotListView.vue'),
-    }
+    },
+    {
+      path: '/spot/:spotId',
+      name: 'spotContent',
+      component: () => import('../views/SpotContent.vue'),
+    },
   ]
 })
 

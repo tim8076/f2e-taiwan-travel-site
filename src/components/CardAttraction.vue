@@ -1,5 +1,6 @@
 <template>
-  <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100">
+  <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100 shadow-lg-hover
+    transition-base">
     <router-link to="/" class="stretched-link" />
     <div class="card-img-top h-171p rounded-3 position-relative bg-gray-300
       d-flex flex-column justify-content-center align-items-center">
@@ -16,10 +17,7 @@
         </div>
       </h3>
       <div class="d-flex align-items-center mb-5">
-        <img class="me-1"
-          v-for="(item, index) in rankStr"
-          :key="index"
-          :src="item" alt="star-icon">
+        <img class="me-1" v-for="(item, index) in rankStr" :key="index" :src="item" alt="star-icon">
       </div>
       <template v-if="placeData.City">
         <span class="badge fs-8 rounded-pill bg-primary-600 text-gray-100 lh-sm me-2">
