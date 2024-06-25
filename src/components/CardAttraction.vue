@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100 shadow-lg-hover
     transition-base">
-    <router-link to="/" class="stretched-link" />
+    <router-link :to="linkObj" class="stretched-link"></router-link>
     <div class="card-img-top h-171p rounded-3 position-relative bg-gray-300
       d-flex flex-column justify-content-center align-items-center">
       <img :src="placeData.Picture.PictureUrl1" class="card-img-top w-100 h-100 rounded-3 object-fit-cover
@@ -75,6 +75,25 @@ export default {
         return this.placeData.ActivityName;
       } else {
         return '';
+      }
+    },
+    linkObj() {
+      if (this.type === 'spot') {
+        return {
+          name: 'spotContent',
+          params: {
+            spotId: this.placeData.ScenicSpotID
+          },
+        }
+      } else if (this.type === 'event') {
+        return {
+          name: 'spotContent',
+          params: {
+            spotId: this.placeData.ActivityID
+          },
+        }
+      } else {
+        return {};
       }
     }
   },
