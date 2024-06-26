@@ -42,8 +42,7 @@
             </a>
           </li>
           <li class="me-2">
-            <a :href="`${singlePlace.WebsiteUrl}`"
-              class="w-30p h-30p rounded-circle border border-primary-700
+            <a :href="`${singlePlace.WebsiteUrl}`" class="w-30p h-30p rounded-circle border border-primary-700
               d-flex justify-content-center align-items-center text-primary-700
               text-gray-100-hover bg-primary-700-hover transition-base w-lg-40p h-lg-40p">
               <i class=" fa-solid fa-globe fs-7"></i>
@@ -118,18 +117,14 @@
           </p>
         </div>
         <div class="col-lg-8 d-none d-lg-block">
-          <img class="object-fit-cover h-100 w-100"
-           :src="singlePlace.Picture.PictureUrl1"
-           alt="spot-image"
+          <img class="object-fit-cover h-100 w-100" :src="singlePlace.Picture.PictureUrl1" alt="spot-image"
             v-if="singlePlace.Picture.PictureUrl1">
-          <img class="object-fit-cover h-100 w-100"
-            src="../assets/images/error/no-image-sm.svg"
-            alt="spot-im" v-else>
+          <img class="object-fit-cover h-100 w-100" src="../assets/images/error/no-image-sm.svg" alt="spot-im" v-else>
         </div>
       </div>
     </div>
   </section>
-  <section class="mb-10">
+  <section class="mb-8 mb-lg-10">
     <div class="container px-7 px-lg-5">
       <h2 class="fs-5 fs-md-3 fw-bold text-primary-800 letter-spacing-12 mb-4 mb-md-5">
         景點特色
@@ -150,34 +145,58 @@
       </h2>
     </div>
     <div class="h-352p h-md-452p mb-8 d-lg-none">
-      <LeafletMap
-        v-if="placesByZipCode.length"
-        mapId="mapPhone"
-        :lat="singlePlace.Position.PositionLat"
-        :lon="singlePlace.Position.PositionLon"
-        :places="placesByZipCode"/>
+      <LeafletMap v-if="placesByZipCode.length" mapId="mapPhone" :lat="singlePlace.Position.PositionLat"
+        :lon="singlePlace.Position.PositionLon" :places="placesByZipCode" />
     </div>
     <div class="container d-none d-lg-block">
       <div class="row gx-5">
         <div class="col-lg-4">
           <ul class="h-436p overflow-y-auto spot-list hide-scrollbar">
-            <li class="spot-list__item shadow-lg-hover"
-              v-for="place in placesByZipCode"
-              :key="place.ScenicSpotID">
-              <CardHorizontal v-bind="place"
-                @set-position="changeSpotPosition"/>
+            <li class="spot-list__item shadow-lg-hover" v-for="place in placesByZipCode" :key="place.ScenicSpotID">
+              <CardHorizontal v-bind="place" @set-position="changeSpotPosition" />
             </li>
           </ul>
         </div>
         <div class="col-lg-8">
-          <LeafletMap
-            v-if="placesByZipCode.length"
-            mapId="mapTable"
-            :lat="currentPosition.PositionLat"
-            :lon="currentPosition.PositionLon"
-            :places="placesByZipCode"/>
+          <LeafletMap v-if="placesByZipCode.length" mapId="mapTable" :lat="currentPosition.PositionLat"
+            :lon="currentPosition.PositionLon" :places="placesByZipCode" />
         </div>
       </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <h2 class="fs-5 fs-md-3 fw-bold text-primary-800 letter-spacing-12 mb-4 mb-lg-5">
+        旅客評價
+      </h2>
+      <div class="d-flex align-items-center justify-content-between mb-4 mb-lg-7">
+        <div class="d-flex align-items-end align-items-lg-center">
+          <div class="d-none d-lg-block w-125p border-bottom border-gray-500"></div>
+          <p class="text-gray-700 fs-4 fw-bold me-r1">3.5</p>
+          <div class="d-flex align-items-center">
+            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
+              class="w-14p h-14p w-lg-30p h-lg-28p">
+            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
+              class="w-14p h-14p w-lg-30p h-lg-28p">
+            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
+              class="w-14p h-14p w-lg-30p h-lg-28p">
+            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
+              class="w-14p h-14p w-lg-30p h-lg-28p">
+            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
+              class="w-14p h-14p w-lg-30p h-lg-28p">
+          </div>
+          <p class="text-gray-500 ms-2 fs-8 fs-lg-6">32則評論</p>
+        </div>
+        <button class="btn btn-outline-primary-700 text-gray-100-hover" type="button">
+          <span class="d-none d-lg-inline me-r1">排序</span>
+          <i class="fa-solid fa-arrow-down-short-wide"></i>
+        </button>
+      </div>
+      <ul>
+        <li class="mb-6 mb-md-9">
+          <CardComment />
+        </li>
+      </ul>
     </div>
   </section>
   <section class="pb-10 pb-md-22">
@@ -186,8 +205,7 @@
         這些景點大家也推
       </h2>
       <ul class="row">
-        <li class="col-md-6 col-lg-4 mb-4 mb-md-0"
-          v-for="item in places" :key="item">
+        <li class="col-md-6 col-lg-4 mb-4 mb-md-0" v-for="item in places" :key="item">
           <CardAttraction type="spot" :placeData="item" />
         </li>
       </ul>
@@ -198,6 +216,7 @@
 <script>
 import CardHorizontal from '@/components/CardHorizontal.vue';
 import CardAttraction from '@/components/CardAttraction.vue';
+import CardComment from '@/components/CardComment.vue';
 import LeafletMap from '@/components/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
 import { usePlacesStore } from '@/stores/places.js';
@@ -213,6 +232,7 @@ export default {
     CardHorizontal,
     CardAttraction,
     LeafletMap,
+    CardComment,
   },
   computed: {
     ...mapState(usePlacesStore, ['singlePlace', 'placesByZipCode', 'randomPlaces']),
@@ -226,24 +246,27 @@ export default {
     }
   },
   methods: {
-    ...mapActions(usePlacesStore, ['getSinglePlace', 'getPlacesByZipcode', 'getPlaces']),
+    ...mapActions(usePlacesStore, [
+    'getSinglePlace',
+    'getPlacesByZipcode',
+    'getPlaces']),
     changeSpotPosition(position) {
       this.position = position;
-    }
+    },
+    async loadData(spotId) {
+      await this.getPlaces();
+      this.places = this.randomPlaces(3);
+      await this.getSinglePlace(spotId);
+      await this.getPlacesByZipcode(this.singlePlace.ZipCode);
+    },
   },
-  async created() {
+  created() {
     const spotId = this.$route.params.spotId;
-    await this.getPlaces();
-    this.places = this.randomPlaces(3);
-    await this.getSinglePlace(spotId);
-    await this.getPlacesByZipcode(this.singlePlace.ZipCode);
+    this.loadData(spotId);
   },
   async beforeRouteUpdate(to) {
     const spotId = to.params.spotId;
-    await this.getPlaces();
-    this.places = this.randomPlaces(3);
-    await this.getSinglePlace(spotId);
-    await this.getPlacesByZipcode(this.singlePlace.ZipCode);
+    this.loadData(spotId);
   }
 }
 </script>
