@@ -185,16 +185,20 @@
             <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
               class="w-14p h-14p w-lg-30p h-lg-28p">
           </div>
-          <p class="text-gray-500 ms-2 fs-8 fs-lg-6">32則評論</p>
+          <p class="text-gray-500 ms-2 fs-8 fs-lg-6">
+            {{ currentComments.length }}則評論
+          </p>
         </div>
         <button class="btn btn-outline-primary-700 text-gray-100-hover" type="button">
           <span class="d-none d-lg-inline me-r1">排序</span>
           <i class="fa-solid fa-arrow-down-short-wide"></i>
         </button>
       </div>
-      <ul>
-        <li class="mb-6 mb-md-9">
-          <CardComment />
+      <ul class="mh-352p overflow-y-auto mb-6 mb-md-9">
+        <li class="mb-6 mb-md-9"
+          v-for="comment in currentComments"
+          :key="comment.id">
+          <CardComment v-bind="comment"/>
         </li>
       </ul>
     </div>
@@ -220,6 +224,7 @@ import CardComment from '@/components/CardComment.vue';
 import LeafletMap from '@/components/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
 import { usePlacesStore } from '@/stores/places.js';
+import { useCommentsStore } from '@/stores/comments.js';
 
 export default {
   data() {
@@ -235,7 +240,14 @@ export default {
     CardComment,
   },
   computed: {
-    ...mapState(usePlacesStore, ['singlePlace', 'placesByZipCode', 'randomPlaces']),
+    ...mapState(usePlacesStore, [
+      'singlePlace',
+      'placesByZipCode',
+      'randomPlaces',
+    ]),
+    ...mapState(useCommentsStore, [
+      'currentComments',
+    ]),
     shortDetail() {
       const index = this.singlePlace.DescriptionDetail.indexOf('。');
       return this.singlePlace.DescriptionDetail.slice(0, index + 1);
@@ -247,9 +259,13 @@ export default {
   },
   methods: {
     ...mapActions(usePlacesStore, [
-    'getSinglePlace',
-    'getPlacesByZipcode',
-    'getPlaces']),
+      'getSinglePlace',
+      'getPlacesByZipcode',
+      'getPlaces',
+    ]),
+    ...mapActions(useCommentsStore, [
+      'getComments'
+    ]),
     changeSpotPosition(position) {
       this.position = position;
     },
@@ -258,15 +274,16 @@ export default {
       this.places = this.randomPlaces(3);
       await this.getSinglePlace(spotId);
       await this.getPlacesByZipcode(this.singlePlace.ZipCode);
+      await this.getComments('spot');
     },
   },
-  created() {
+  async created() {
     const spotId = this.$route.params.spotId;
-    this.loadData(spotId);
+    await this.loadData(spotId);
   },
   async beforeRouteUpdate(to) {
     const spotId = to.params.spotId;
-    this.loadData(spotId);
+    await this.loadData(spotId);
   }
 }
 </script>
