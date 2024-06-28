@@ -156,7 +156,7 @@ export const useCommentsStore = defineStore('comments', {
             type: 'event',
             title: '燈光節驚艷',
             comment: '這次的燈光節真的非常驚艷，各種燈光裝置創意十足，尤其是主題燈展部分，色彩繽紛，場景變化多樣，吸引了大量遊客。活動現場的氛圍也很好，有很多小吃攤和娛樂設施，不過人潮洶湧，建議早點到場以避開高峰期。總的來說，是一個值得一看的精彩活動。',
-            star: 4.8,
+            star: 4.5,
           },
           {
             id: 2,
@@ -224,7 +224,22 @@ export const useCommentsStore = defineStore('comments', {
         ]
       },
       currentComments:[],
+      rankLevel: [
+        2.5,
+        3,
+        3.5,
+        4,
+        4.5,
+      ],
     };
+  },
+  getters: {
+    averageStar() {
+      const starTotal = this.currentComments.reduce((current, next) => {
+        return current + next.star;
+      }, 0);
+      return Math.round(starTotal / this.currentComments.length);
+    }
   },
   actions: {
     async getComments(type) {
@@ -249,7 +264,32 @@ export const useCommentsStore = defineStore('comments', {
           confirmButtonText: '確認',
         });
       }
-    }
+    },
+    createRank({ level, color }) {
+      let randomLevel = this.rankLevel[Math.floor(Math.random() * this.rankLevel.length)];
+      if (level) randomLevel = level;
+      let fullStar = new URL(`../assets/images/star/star-filled.svg`, import.meta.url).href;
+      let halfStar = new URL(`../assets/images/star/half-star-filled.svg`, import.meta.url).href;
+      let outLineStar = new URL(`../assets/images/star/star-outline.svg`, import.meta.url).href;
+      if (color === 'yellow') {
+        fullStar = new URL(`../assets/images/star/star-filled-yellow.svg`, import.meta.url).href;
+        halfStar = new URL(`../assets/images/star/half-star-filled-yellow.svg`, import.meta.url).href;
+        outLineStar = new URL(`../assets/images/star/star-outline-yellow.svg`, import.meta.url).href;
+      }
+      if (randomLevel === 2.5) {
+        return [fullStar, fullStar, halfStar, outLineStar, outLineStar];
+      } else if (randomLevel === 3) {
+        return [fullStar, fullStar, fullStar, outLineStar, outLineStar];
+      } else if (randomLevel === 3.5) {
+        return [fullStar, fullStar, fullStar, halfStar, outLineStar];
+      } else if (randomLevel === 4) {
+        return [fullStar, fullStar, fullStar, fullStar, outLineStar];
+      } else if (randomLevel === 4.5) {
+        return [fullStar, fullStar, fullStar, fullStar, halfStar];
+      } else {
+        return [fullStar, fullStar, fullStar, fullStar, fullStar];
+      }
+    },
   },
 })
 

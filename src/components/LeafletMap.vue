@@ -23,7 +23,7 @@ export default {
   methods: {
     renderMap() {
       this.markersGroup.clearLayers();
-      this.map.setView([this.lat, this.lon], 12);
+      this.map.setView([this.lat, this.lon], 15);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 24,
         attribution: '© OpenStreetMap'
@@ -69,7 +69,7 @@ export default {
     this.map = L.map(this.mapId, {
       zoomAnimation: false
     });
-    this.markersGroup = new L.LayerGroup().addTo(this.map);
+    this.markersGroup = L.layerGroup().addTo(this.map);
     this.renderMap();
   },
 }

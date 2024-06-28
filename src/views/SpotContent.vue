@@ -78,12 +78,11 @@
         </li>
       </ul>
       <div class="d-flex align-items-center mb-md-2">
-        <img class="w-19p h-19p w-md-24p h-md-24p" src="../assets/images/star/star-filled-yellow.svg" alt="star-svg">
-        <img class="w-19p h-19p w-md-24p h-md-24p" src="../assets/images/star/star-filled-yellow.svg" alt="star-svg">
-        <img class="w-19p h-19p w-md-24p h-md-24p" src="../assets/images/star/star-filled-yellow.svg" alt="star-svg">
-        <img class="w-19p h-19p w-md-24p h-md-24p" src="../assets/images/star/half-star-filled-yellow.svg"
-          alt="star-svg">
-        <img class="w-19p h-19p w-md-24p h-md-24p" src="../assets/images/star/star-outline-yellow.svg" alt="star-svg">
+        <img v-for="item in commentStar"
+          :key="item"
+          class="w-19p h-19p w-md-24p h-md-24p"
+          :src="item"
+          alt="star-icon">
         <p class="text-gray-500 fs-8 ms-2">234 則評價</p>
         <p class="text-gray-500 fs-7 ms-auto ms-lg-4">
           {{ singlePlace.City }}
@@ -172,18 +171,12 @@
       <div class="d-flex align-items-center justify-content-between mb-4 mb-lg-7">
         <div class="d-flex align-items-end align-items-lg-center">
           <div class="d-none d-lg-block w-125p border-bottom border-gray-500"></div>
-          <p class="text-gray-700 fs-4 fw-bold me-r1">3.5</p>
+          <p class="text-gray-700 fs-4 fw-bold me-r1">{{ averageStar }}</p>
           <div class="d-flex align-items-center">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-              class="w-14p h-14p w-lg-30p h-lg-28p">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-              class="w-14p h-14p w-lg-30p h-lg-28p">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-              class="w-14p h-14p w-lg-30p h-lg-28p">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-              class="w-14p h-14p w-lg-30p h-lg-28p">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-              class="w-14p h-14p w-lg-30p h-lg-28p">
+            <img v-for="item in commentStar"
+              :key="item"
+              class="w-14p h-14p w-lg-30p h-lg-28p"
+              :src="item" alt="star-icon">
           </div>
           <p class="text-gray-500 ms-2 fs-8 fs-lg-6">
             {{ currentComments.length }}則評論
@@ -195,10 +188,8 @@
         </button>
       </div>
       <ul class="mh-352p overflow-y-auto mb-6 mb-md-9">
-        <li class="mb-6 mb-md-9"
-          v-for="comment in currentComments"
-          :key="comment.id">
-          <CardComment v-bind="comment"/>
+        <li class="mb-6 mb-md-9" v-for="comment in currentComments" :key="comment.id">
+          <CardComment v-bind="comment" />
         </li>
       </ul>
     </div>
@@ -231,6 +222,7 @@ export default {
     return {
       places: [],
       position: null,
+      commentStar: [],
     }
   },
   components: {
@@ -247,6 +239,7 @@ export default {
     ]),
     ...mapState(useCommentsStore, [
       'currentComments',
+      'averageStar',
     ]),
     shortDetail() {
       const index = this.singlePlace.DescriptionDetail.indexOf('。');
@@ -264,7 +257,8 @@ export default {
       'getPlaces',
     ]),
     ...mapActions(useCommentsStore, [
-      'getComments'
+      'getComments',
+      'createRank',
     ]),
     changeSpotPosition(position) {
       this.position = position;
@@ -275,6 +269,10 @@ export default {
       await this.getSinglePlace(spotId);
       await this.getPlacesByZipcode(this.singlePlace.ZipCode);
       await this.getComments('spot');
+      this.commentStar = this.createRank({
+        level: this.averageStar,
+        color: 'yellow',
+      });
     },
   },
   async created() {

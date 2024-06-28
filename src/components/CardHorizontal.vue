@@ -18,11 +18,11 @@
         <div class="card-body pt-0 ps-5 pe-0 pb-0 d-flex flex-column h-100">
           <h3 class="card-title fs-6 mb-2">{{ ScenicSpotName }}</h3>
           <div class="d-flex align-items-center mb-auto">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-icon" class="me-1">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-icon" class="me-1">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-icon" class="me-1">
-            <img src="../assets/images/star/star-filled-yellow.svg" alt="star-icon" class="me-1">
-            <img src="../assets/images/star/half-star-filled-yellow.svg" alt="star-icon">
+            <img class="me-1"
+            v-for="(item, index) in rankStr"
+            :key="index"
+            :src="item"
+            alt="star-icon">
           </div>
           <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import { useCommentsStore } from '@/stores/comments.js';
 export default {
   emits: ['setSpotMap'],
   props: [
@@ -53,10 +55,23 @@ export default {
     'Class3',
     'Position',
   ],
+  data() {
+    return {
+      rankStr: [],
+    }
+  },
   methods: {
     setSpotMap() {
       this.$emit('setPosition', this.Position);
-    }
+    },
+    ...mapActions(useCommentsStore, [
+      'createRank',
+    ]),
   },
+  created() {
+    this.rankStr = this.createRank({
+      color: 'yellow',
+    });
+  }
 }
 </script>

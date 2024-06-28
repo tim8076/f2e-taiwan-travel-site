@@ -5,22 +5,16 @@
       class="d-none d-md-block w-75p h-75p w-lg-90p h-lg-90p rounded-circle me-md-9">
     <div class="flex-md-grow-1">
       <div class="d-flex align-items-end mb-2">
-        <img :src="userImgUrl" alt="user-img"
-          class="w-40p h-40p rounded-circle d-md-none">
+        <img :src="userImgUrl" alt="user-img" class="w-40p h-40p rounded-circle d-md-none">
         <h3 class="fw-bold fs-6 fs-lg-5 text-gray-700 ms-2 ms-md-0">
           {{ title }}
         </h3>
         <div class="d-flex align-items-center ms-auto">
-          <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-            class="w-14p h-14p w-lg-30p h-lg-28p">
-          <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-            class="w-14p h-14p w-lg-30p h-lg-28p">
-          <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-            class="w-14p h-14p w-lg-30p h-lg-28p">
-          <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-            class="w-14p h-14p w-lg-30p h-lg-28p">
-          <img src="../assets/images/star/star-filled-yellow.svg" alt="star-filled-icon"
-            class="w-14p h-14p w-lg-30p h-lg-28p">
+          <img class="w-14p h-14p w-lg-30p h-lg-28p"
+            v-for="(item, index) in rankStr"
+            :key="index"
+            :src="item"
+            alt="star-icon">
         </div>
       </div>
       <p class="fs-8 fs-md-6 letter-spacing-5 text-justify">
@@ -31,6 +25,8 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import { useCommentsStore } from '@/stores/comments.js';
 export default {
   props: {
     title: {
@@ -53,8 +49,20 @@ export default {
   data() {
     return {
       userImgUrl: this.user.picture.medium,
+      rankStr: [],
     };
   },
+  methods: {
+    ...mapActions(useCommentsStore, [
+      'createRank',
+    ]),
+  },
+  created() {
+    this.rankStr = this.createRank({ 
+      level: this.star,
+      color: 'yellow',
+    });
+  }
 }
 </script>
 
