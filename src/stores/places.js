@@ -8,6 +8,19 @@ export const usePlacesStore = defineStore('places', {
   state: () => {
     return {
       placesList: [],
+      placesByZipCode: [],
+      singlePlace: {
+        Address: '',
+        TravelInfo: '',
+        DescriptionDetail: '',
+        Picture: {
+          PictureUrl1: '',
+        },
+        Position: {
+          PositionLat: 0,
+          PositionLon: 0,
+        }
+      },
     };
   },
   getters: {
@@ -33,7 +46,8 @@ export const usePlacesStore = defineStore('places', {
       try {
         loadingStore.isLoading = true;
         const token = await apiStore.readToken();
-        const path = `${import.meta.env.VITE_API_PATH_BASE}/v2/Tourism/ScenicSpot?format=JSON&top=60`;
+        
+        let path = `${import.meta.env.VITE_API_PATH_BASE}/v2/Tourism/ScenicSpot?format=JSON&top=60`;
         const res = await axios.get(path, {
           headers: {
             authorization: `Bearer ${token}`,
@@ -53,5 +67,57 @@ export const usePlacesStore = defineStore('places', {
         loadingStore.isLoading = false;
       }
     },
+    async getSinglePlace(spotId) {
+      const apiStore = useApiStore();
+      const loadingStore = useLoadingStore();
+      try {
+        loadingStore.isLoading = true;
+        const token = await apiStore.readToken();
+        let path = `${import.meta.env.VITE_API_PATH_BASE}/v2/Tourism/ScenicSpot?format=JSON&$filter=ScenicSpotID eq '${spotId}'`;
+        const res = await axios.get(path, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          }
+        });
+        this.singlePlace = res.data[0];
+        setTimeout(() => {
+          loadingStore.isLoading = false;
+        }, 1000);
+      } catch (err) {
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: '確認',
+        });
+        loadingStore.isLoading = false;
+      }
+    },
+    async getPlacesByZipcode(zipCode) {
+      const apiStore = useApiStore();
+      const loadingStore = useLoadingStore();
+      try {
+        loadingStore.isLoading = true;
+        const token = await apiStore.readToken();
+        let path = `${import.meta.env.VITE_API_PATH_BASE}/v2/Tourism/ScenicSpot?format=JSON&$filter=ZipCode eq '${zipCode}'`;
+        const res = await axios.get(path, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          }
+        });
+        this.placesByZipCode = res.data;
+        setTimeout(() => {
+          loadingStore.isLoading = false;
+        }, 1000);
+      } catch (err) {
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: '確認',
+        });
+        loadingStore.isLoading = false;
+      }
+    }
   },
 })

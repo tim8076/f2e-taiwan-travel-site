@@ -1,10 +1,14 @@
 <template>
-  <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100">
-    <router-link to="/" class="stretched-link" />
+  <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100 shadow-lg-hover
+    transition-base">
+    <router-link :to="linkObj" class="stretched-link"></router-link>
     <div class="card-img-top h-171p rounded-3 position-relative bg-gray-300
       d-flex flex-column justify-content-center align-items-center">
-      <img :src="placeData.Picture.PictureUrl1" class="card-img-top w-100 h-100 rounded-3 object-fit-cover
-          position-absolute top-0 start-0" :alt="placeData.Picture.PictureDescription1">
+      <img
+        :src="placeData.Picture.PictureUrl1"
+        class="card-img-top w-100 h-100 rounded-3 object-fit-cover
+          position-absolute top-0 start-0"
+        :alt="placeData.Picture.PictureDescription1">
       <img class="mb-1" src="../assets/images/error/no-image.svg" alt="沒有圖片顯示">
       <p class="fw-bold fs-6 text-gray-100">No image!</p>
     </div>
@@ -19,7 +23,8 @@
         <img class="me-1"
           v-for="(item, index) in rankStr"
           :key="index"
-          :src="item" alt="star-icon">
+          :src="item"
+          alt="star-icon">
       </div>
       <template v-if="placeData.City">
         <span class="badge fs-8 rounded-pill bg-primary-600 text-gray-100 lh-sm me-2">
@@ -46,6 +51,8 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import { useCommentsStore } from '@/stores/comments.js';
 export default {
   props: {
     type: {
@@ -60,14 +67,8 @@ export default {
   data() {
     return {
       isLike: false,
-      rankLevel: [
-        3.5,
-        4,
-        4.5,
-        5
-      ],
       rankStr: [],
-    }
+    };
   },
   computed: {
     cardTitle() {
@@ -78,27 +79,34 @@ export default {
       } else {
         return '';
       }
-    }
-  },
-  methods: {
-    createRank() {
-      const randomLevel = this.rankLevel[Math.floor(Math.random() * this.rankLevel.length)];
-      const fullStar = new URL(`../assets/images/star/star-filled.svg`, import.meta.url).href;
-      const halfStar = new URL(`../assets/images/star/half-star-filled.svg`, import.meta.url).href;
-      const outLineStar = new URL(`../assets/images/star/star-outline.svg`, import.meta.url).href;
-      if (randomLevel === 3.5) {
-        this.rankStr = [fullStar, fullStar, fullStar, halfStar, outLineStar];
-      } else if (randomLevel === 4) {
-        this.rankStr = [fullStar, fullStar, fullStar, fullStar, outLineStar];
-      } else if (randomLevel === 4.5) {
-        this.rankStr = [fullStar, fullStar, fullStar, fullStar, halfStar];
+    },
+    linkObj() {
+      if (this.type === 'spot') {
+        return {
+          name: 'spotContent',
+          params: {
+            spotId: this.placeData.ScenicSpotID
+          },
+        }
+      } else if (this.type === 'event') {
+        return {
+          name: 'spotContent',
+          params: {
+            spotId: this.placeData.ActivityID
+          },
+        }
       } else {
-        this.rankStr = [fullStar, fullStar, fullStar, fullStar, fullStar];
+        return {};
       }
     },
   },
+  methods: {
+    ...mapActions(useCommentsStore, [
+      'createRank'
+    ]),
+  },
   created() {
-    this.createRank();
+    this.rankStr = this.createRank({});
   }
 }
 </script>

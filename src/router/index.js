@@ -13,8 +13,20 @@ const router = createRouter({
       path: '/spotList',
       name: 'spotList',
       component: () => import('../views/SpotListView.vue'),
+    },
+    {
+      path: '/spot/:spotId',
+      name: 'spotContent',
+      component: () => import('../views/SpotContent.vue'),
+    },
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
     }
-  ]
+  },
 })
 
 export default router
