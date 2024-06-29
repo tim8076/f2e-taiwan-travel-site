@@ -83,7 +83,9 @@
           class="w-19p h-19p w-md-24p h-md-24p"
           :src="item"
           alt="star-icon">
-        <p class="text-gray-500 fs-8 ms-2">234 則評價</p>
+        <p class="text-gray-500 fs-8 ms-2">
+          {{ sortedComments.length }}則評價
+        </p>
         <p class="text-gray-500 fs-7 ms-auto ms-lg-4">
           {{ singlePlace.City }}
         </p>
@@ -91,11 +93,12 @@
     </div>
   </section>
   <section class="mb-8">
-    <img class="object-fit-cover h-220p h-md-300p d-lg-none w-100" :src="singlePlace.Picture.PictureUrl1"
+    <img class="object-fit-cover h-220p h-md-300p d-lg-none w-100"
+      :src="singlePlace.Picture.PictureUrl1"
       alt="spot-image">
     <div class="container px-7 px-lg-5">
       <div class="row gx-lg-4">
-        <div class="col-lg-4 pt-7 px-lg-6 pb-7 order-last order-lg-first border-lg">
+        <div class="col-lg-4 pt-7 px-lg-6 pb-7 pb-md-0 order-last order-lg-first border-lg">
           <h2 class="fs-5 fs-md-3 fw-bold text-primary-800 letter-spacing-12 mb-2">
             關於
           </h2>
@@ -115,10 +118,16 @@
             {{ singlePlace.OpenTime || '全天候開放' }}
           </p>
         </div>
-        <div class="col-lg-8 d-none d-lg-block">
-          <img class="object-fit-cover h-100 w-100" :src="singlePlace.Picture.PictureUrl1" alt="spot-image"
+        <div class="col-lg-8 d-none d-lg-block mh-500p">
+          <img class="object-fit-cover h-100 w-100"
+            :src="singlePlace.Picture.PictureUrl1"
+            alt="spot-image"
+            @error="this.src='../assets/images/error/no-image-sm.svg'"
             v-if="singlePlace.Picture.PictureUrl1">
-          <img class="object-fit-cover h-100 w-100" src="../assets/images/error/no-image-sm.svg" alt="spot-im" v-else>
+          <img class="object-fit-cover h-100 w-100"
+            src="../assets/images/error/no-image-sm.svg"
+            alt="spot-im"
+            v-else>
         </div>
       </div>
     </div>
@@ -179,16 +188,27 @@
               :src="item" alt="star-icon">
           </div>
           <p class="text-gray-500 ms-2 fs-8 fs-lg-6">
-            {{ currentComments.length }}則評論
+            {{ sortedComments.length }}則評論
           </p>
         </div>
-        <button class="btn btn-outline-primary-700 text-gray-100-hover" type="button">
+        <button class="btn btn-outline-primary-700 text-gray-100-hover"
+          type="button"
+          @click="sortComment('highToLow')"
+          v-if="sortDirection === '' ||
+          sortDirection === 'LowToHigh'">
           <span class="d-none d-lg-inline me-r1">排序</span>
           <i class="fa-solid fa-arrow-down-short-wide"></i>
         </button>
+        <button class="btn btn-outline-primary-700 text-gray-100-hover"
+          type="button"
+          @click="sortComment('LowToHigh')"
+          v-else>
+          <span class="d-none d-lg-inline me-r1">排序</span>
+          <i class="fa-solid fa-arrow-up-short-wide"></i>
+        </button>
       </div>
       <ul class="mh-352p overflow-y-auto mb-6 mb-md-9">
-        <li class="mb-6 mb-md-9" v-for="comment in currentComments" :key="comment.id">
+        <li class="mb-6 mb-md-9" v-for="comment in sortedComments" :key="comment.id">
           <CardComment v-bind="comment" />
         </li>
       </ul>
@@ -200,7 +220,14 @@
         這些景點大家也推
       </h2>
       <ul class="row">
-        <li class="col-md-6 col-lg-4 mb-4 mb-md-0" v-for="item in places" :key="item">
+        <li class="d-lg-none col-md-6 mb-4 mb-md-0"
+          v-for="item in places.slice(0, 2)"
+          :key="item">
+          <CardAttraction type="spot" :placeData="item" />
+        </li>
+        <li class="d-none d-lg-block col-lg-4"
+          v-for="item in places"
+          :key="item">
           <CardAttraction type="spot" :placeData="item" />
         </li>
       </ul>
@@ -238,8 +265,9 @@ export default {
       'randomPlaces',
     ]),
     ...mapState(useCommentsStore, [
-      'currentComments',
+      'sortedComments',
       'averageStar',
+      'sortDirection',
     ]),
     shortDetail() {
       const index = this.singlePlace.DescriptionDetail.indexOf('。');
@@ -259,6 +287,7 @@ export default {
     ...mapActions(useCommentsStore, [
       'getComments',
       'createRank',
+      'sortComment',
     ]),
     changeSpotPosition(position) {
       this.position = position;

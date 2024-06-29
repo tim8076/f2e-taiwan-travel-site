@@ -224,6 +224,7 @@ export const useCommentsStore = defineStore('comments', {
         ]
       },
       currentComments:[],
+      sortDirection: '',
       rankLevel: [
         2.5,
         3,
@@ -239,7 +240,16 @@ export const useCommentsStore = defineStore('comments', {
         return current + next.star;
       }, 0);
       return Math.round(starTotal / this.currentComments.length);
-    }
+    },
+    sortedComments() {
+      if (!this.sortDirection) return this.currentComments;
+      if (this.sortDirection === 'highToLow') {
+        return [...this.currentComments].sort((a, b) => b.star - a.star);
+      }
+      if (this.sortDirection === 'LowToHigh') {
+        return [...this.currentComments].sort((a, b) => a.star - b.star);
+      }
+    },
   },
   actions: {
     async getComments(type) {
@@ -290,6 +300,9 @@ export const useCommentsStore = defineStore('comments', {
         return [fullStar, fullStar, fullStar, fullStar, fullStar];
       }
     },
+    sortComment(direction) {
+      this.sortDirection = direction;
+    }
   },
 })
 
