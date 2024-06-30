@@ -30,7 +30,9 @@
               <li class="mb-2 col-4 col-md-2"
                 v-for="town in currentCityTowns"
                 :key="town.TownCode">
-                <a href="#" class="text-gray-700 text-primary-700-hover fs-7">
+                <a href="#"
+                  class="text-gray-700 text-primary-700-hover fs-7"
+                  @click.prevent="selectRegion(city.CityName, town.TownName)">
                   {{ town.TownName }}
                 </a>
               </li>
@@ -45,8 +47,10 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import { useCityStore } from '@/stores/county.js';
+import { usePlacesStore } from '@/stores/places.js';
 
 export default {
+  emit: ['selectTown'],
   data() {
     return {
       currentCity: '',
@@ -62,10 +66,20 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useCityStore, ['getCities', 'getTowns']),
+    ...mapActions(useCityStore, [
+      'getCities',
+      'getTowns'
+    ]),
+    ...mapActions(usePlacesStore, [
+      'getZipcodeByRegion'
+    ]),
     async getCurrentTowns(city) {
       this.currentCity = city.CityName;
       await this.getTowns(city.City);
+    },
+    selectRegion(city, town) {
+      const zipcode = this.getZipcodeByRegion(city, town);
+      this.$emit('selectTown', zipcode);
     }
   },
   created() {

@@ -485,6 +485,7 @@ $custom-spacers: (
   75: 75%,
   100: 100%,
   auto: auto,
+  body: calc(100vh - 340px),
   14p: 0.875rem,  // 14px
   19p: 1.1875rem, //19px
   24p: 1.5rem,    //24px
@@ -505,6 +506,7 @@ $custom-spacers: (
   436p: 27.25rem,  // 436px
   452p: 28.25rem, // 452px
   500p: 31.25rem, // 500px
+  914p: 57.125rem, //914px
 );
 // scss-docs-end spacer-variables-maps
 
@@ -518,6 +520,7 @@ $position-values: (
   50: 50%,
   100: 100%,
   28p: 1.75rem,
+  100p: 6.25rem,
 ) !default;
 // scss-docs-end position-map
 
