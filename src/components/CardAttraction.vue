@@ -1,7 +1,15 @@
 <template>
   <div class="card border-0 pt-5 px-5 pb-6 shadow position-relative h-100 shadow-lg-hover
     transition-base">
-    <router-link :to="linkObj" class="stretched-link"></router-link>
+    <router-link
+      :to="linkObj"
+      class="stretched-link"
+      v-if="interAction === 'link'" />
+    <a href="#"
+      class="stretched-link"
+      @click.prevent="setSpotMap"
+      v-else>
+    </a>
     <div class="card-img-top h-171p rounded-3 position-relative bg-gray-300
       d-flex flex-column justify-content-center align-items-center">
       <img
@@ -54,7 +62,12 @@
 import { mapActions } from 'pinia';
 import { useCommentsStore } from '@/stores/comments.js';
 export default {
+  emits: ['setSpotMap'],
   props: {
+    interAction: {
+      type: String,
+      default: 'link',
+    },
     type: {
       type: String,
       default: '',
@@ -104,6 +117,9 @@ export default {
     ...mapActions(useCommentsStore, [
       'createRank'
     ]),
+    setSpotMap() {
+      this.$emit('setSpotMap', this.placeData.Position);
+    },
   },
   created() {
     this.rankStr = this.createRank({});

@@ -246,7 +246,6 @@ $utilities: map-merge(
       class: min-vh,
       values: (
         100: 100vh,
-        body: calc(100vh - 340px),
       )
     ),
     // scss-docs-end utils-sizing

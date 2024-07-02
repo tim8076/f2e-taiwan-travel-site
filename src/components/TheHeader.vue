@@ -32,7 +32,12 @@
           </div>
           <div class="d-flex justify-content-between align-items-center mb-5 mb-lg-0 ms-lg-auto
             justify-content-lg-start">
-            <router-link :to="{ name: 'spotList' }"
+            <router-link :to="{ 
+              name: 'spotList',
+                params: {
+                  zipcode: 'all',
+                }
+              }"
               class="btn btn-gray-100 text-gray-600 text-primary-700-hover">
               找景點
               <i class="fa-solid fa-paper-plane fs-7 ms-1"></i>

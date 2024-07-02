@@ -20,7 +20,12 @@
           mb-6 mb-md-3">
           <h2 class="fw-bold lh-sm fs-3">熱門打卡景點</h2>
           <router-link
-            :to="{ name: 'spotList' }"
+            :to="{ 
+              name: 'spotList',
+              params: {
+                zipcode: 'all',
+              },
+            }"
             class="btn btn-primary-700 text-light d-none d-md-block">
             查看更多
           </router-link>
@@ -35,7 +40,12 @@
           class="mb-8 mb-md-0" />
         <div class="d-flex justify-content-center">
           <router-link
-            :to="{ name: 'spotList' }" 
+            :to="{
+              name: 'spotList',
+              params: {
+                zipcode: 'all',
+              },
+            }" 
             class="btn btn-primary-700 text-center text-light d-md-none">
             查看更多
           </router-link>

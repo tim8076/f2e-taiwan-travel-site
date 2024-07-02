@@ -1,5 +1,5 @@
 <template>
-  <div class="py-7 px-6 bg-gray-100 rounded-3 vw-90 w-md-452p z-3 shadow">
+  <div class="py-7 px-6 bg-gray-100 rounded-3 vw-90 w-md-452p z-3 shadow z-sticky">
     <div class="search-input search-input-gray-200 w-md-75 mb-3" role="search">
       <input class="search-input__input" type="search" placeholder="想去哪裡?" aria-label="Search">
       <button class="search-input__btn" type="button">
