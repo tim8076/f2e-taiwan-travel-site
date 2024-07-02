@@ -10,9 +10,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/spotList',
+      path: '/spotList/:zipcode',
       name: 'spotList',
       component: () => import('../views/SpotListView.vue'),
+    },
+    {
+      path: '/spotCounty/:zipcode',
+      name: 'spotCounty',
+      component: () => import('../views/SpotCounty.vue'),
     },
     {
       path: '/spot/:spotId',

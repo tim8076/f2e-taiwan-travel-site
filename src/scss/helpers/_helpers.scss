@@ -10,3 +10,11 @@
   display: none;
   /* for Chrome, Safari, and Opera */
 }
+
+.min-vh-body {
+  min-height: calc(100vh - 290px);
+
+  @include media-breakpoint-up(md) {
+    min-height: calc(100vh - 261px);
+  }
+}

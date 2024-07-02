@@ -10,15 +10,12 @@
         <div class="d-none d-md-flex justify-content-between align-items-center">
           <div class="w-50 d-flex">
             <div class="w-50 me-5 position-relative">
-              <button type="button"
-                class="btn py-2 px-4 bg-gray-100 rounded-pill
-                text-primary-700 border-primary-700 w-100 text-start"
-                @click="isCountyPanelOpen = !isCountyPanelOpen">
+              <button type="button" class="btn py-2 px-4 bg-gray-100 rounded-pill
+                text-primary-700 border-primary-700 w-100 text-start" @click="isCountyPanelOpen = !isCountyPanelOpen">
                 選擇地區
               </button>
-              <AccordionSpot
-                class="position-absolute top-100 start-0"
-                v-show="isCountyPanelOpen"/>
+              <AccordionSpot class="position-absolute top-100 start-0" v-show="isCountyPanelOpen"
+                @select-town="getPlacesByTown" />
             </div>
             <div class="w-50">
               <button type="button" class="btn py-2 px-4 bg-gray-100 rounded-pill
@@ -32,10 +29,17 @@
               <i class="fa-solid fa-filter me-1"></i>
               篩選
             </button>
-            <button class="btn btn-primary-700 text-gray-100 fs-7 p-r1 w-34p h-34p rounded-circle
-              d-flex justify-content-between align-items-center">
+            <router-link
+              :to="{
+                name: 'spotCounty',
+                params: {
+                  zipcode: currentZipcode
+                }
+              }"
+              class="btn btn-primary-700 text-gray-100 fs-7 p-r1 w-34p h-34p rounded-circle
+                d-flex justify-content-between align-items-center">
               <i class="fa-solid fa-location-dot"></i>
-            </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -46,13 +50,11 @@
           <div class="d-flex mb-3">
             <div class="w-50 me-4 position-relative">
               <button type="button" class="btn py-2 px-4 bg-gray-100 rounded-pill
-                text-primary-700 border-primary-700 w-100 text-start"
-                @click="isCountyPanelOpen = !isCountyPanelOpen">
+                text-primary-700 border-primary-700 w-100 text-start" @click="isCountyPanelOpen = !isCountyPanelOpen">
                 選擇地區
               </button>
-              <AccordionSpot
-                class="position-absolute top-100 start-0"
-                v-show="isCountyPanelOpen"/>
+              <AccordionSpot class="position-absolute top-100 start-0" v-show="isCountyPanelOpen"
+                @select-town="getPlacesByTown" />
             </div>
             <div class="w-50">
               <button type="button" class="btn py-2 px-4 bg-gray-100 rounded-pill
@@ -73,11 +75,16 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container min-vh-body">
         <div class="row gy-4 gy-lg-6">
-          <div class="col-md-6 col-lg-4" v-for="data in places" :key="data.ScenicSpotID">
-            <CardAttraction :type="'spot'" :placeData="data" />
-          </div>
+          <template v-if="currentPlaces.length">
+            <div class="col-md-6 col-lg-4" v-for="data in currentPlaces" :key="data.ScenicSpotID">
+              <CardAttraction :type="'spot'" :placeData="data" />
+            </div>
+          </template>
+          <p class="fs-4 text-primary-700 fw-bold text-center" v-else>
+            您尋找的區域，<br class="d-md-none" />目前沒有推薦景點喔
+          </p>
         </div>
       </div>
     </section>
@@ -97,28 +104,7 @@ export default {
         import.meta.url).href,
       places: [],
       isCountyPanelOpen: false,
-      swiperSetting: {
-        spaceBetween: 20,
-        grid: {
-          rows: 4,
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 40,
-             grid: {
-              rows: 1,
-            },
-          },
-          960: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-            grid: {
-              rows: 1,
-            },
-          },
-        }
-      },
+      currentZipcode: 'all',
     }
   },
   components: {
@@ -126,14 +112,34 @@ export default {
     AccordionSpot,
   },
   computed: {
-    ...mapState(usePlacesStore, ['randomPlaces']),
+    ...mapState(usePlacesStore, [
+      'randomPlaces',
+      'placesByZipCode',
+    ]),
+    currentPlaces() {
+      if (this.currentZipcode !== 'all') return this.placesByZipCode;
+      return this.places;
+    }
   },
   methods: {
-    ...mapActions(usePlacesStore, ['getPlaces']),
+    ...mapActions(usePlacesStore, [
+      'getPlaces',
+      'getPlacesByZipcode',
+    ]),
+    getPlacesByTown(zipcode) {
+      this.currentZipcode = zipcode;
+      this.isCountyPanelOpen = false;
+      this.getPlacesByZipcode(zipcode);
+    },
   },
   async created() {
-    await this.getPlaces();
-    this.places = this.randomPlaces(9);
+    this.currentZipcode = this.$route.params.zipcode;
+    if (this.currentZipcode === 'all') {
+      await this.getPlaces();
+      this.places = this.randomPlaces(9);
+    } else {
+      await this.getPlacesByZipcode(this.currentZipcode);
+    }
   },
 }
 </script>

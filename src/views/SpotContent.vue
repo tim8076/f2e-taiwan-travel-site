@@ -1,7 +1,12 @@
 <template>
   <section class="pt-4 pt-lg-8 mb-2 mb-md-6">
     <div class="container d-flex flex-column px-7 px-lg-5">
-      <router-link :to="{ name: 'spotList' }"
+      <router-link :to="{
+        name: 'spotList',
+        params: {
+          zipcode: 'all',
+        }
+      }"
         class="fs-7 fw-bold text-gray-500 d-flex align-items-start d-md-none mb-1">
         <i class="fa-solid fa-chevron-left fs-5 me-1"></i>
         景點列表
@@ -9,12 +14,24 @@
       <nav class="d-none d-md-block mb-1" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <router-link :to="{ name: 'spotList' }" class="text-gray-500 text-gray-600-hover">
+            <router-link :to="{
+              name: 'spotList',
+              params: {
+                zipcode: 'all',
+              }
+            }"
+            class="text-gray-500 text-gray-600-hover">
               {{ singlePlace.City }}
             </router-link>
           </li>
           <li class="breadcrumb-item">
-            <router-link :to="{ name: 'spotList' }" class="text-gray-500 text-gray-600-hover">
+            <router-link :to="{
+              name: 'spotList',
+              params: {
+                zipcode: 'all',
+              }
+            }"
+            class="text-gray-500 text-gray-600-hover">
               景點
             </router-link>
           </li>
@@ -59,19 +76,19 @@
       </div>
       <ul class="d-flex align-items-center mb-2 order-md-last mb-md-0">
         <li class="me-1" v-if="singlePlace.Class1">
-          <router-link :to="{ name: 'spotList' }"
+          <router-link :to="{ name: 'home' }"
             class="btn btn-sm btn-primary-600 text-gray-100 rounded-pill fs-8 fw-bold">
             {{ singlePlace.Class1 }}
           </router-link>
         </li>
         <li class="me-1" v-if="singlePlace.Class2">
-          <router-link :to="{ name: 'spotList' }"
+          <router-link :to="{ name: 'home' }"
             class="btn btn-sm btn-primary-600 text-gray-100 rounded-pill fs-8 fw-bold">
             {{ singlePlace.Class2 }}
           </router-link>
         </li>
         <li class="me-1" v-if="singlePlace.Class3">
-          <router-link :to="{ name: 'spotList' }"
+          <router-link :to="{ name: 'home' }"
             class="btn btn-sm btn-primary-600 text-gray-100 rounded-pill fs-8 fw-bold">
             {{ singlePlace.Class3 }}
           </router-link>
